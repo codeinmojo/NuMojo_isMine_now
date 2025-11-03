@@ -7,6 +7,10 @@ from sys import simdwidthof
 
 from numojo.core.ndarray import NDArray
 
+# import the Custem Errors
+from ..errors import raise_shape_mismatch_error
+
+#    super().__init__(message)
 
 fn math_func_1_array_in_one_array_out[
     dtype: DType,
@@ -63,9 +67,9 @@ fn math_func_2_array_in_one_array_out[
     Returns:
         A new NDArray that is the result of applying the function to the input NDArrays.
     """
-
+   # TODO
     if array1.shape != array2.shape:
-        raise Error("Shape Mismatch error shapes must match for this function")
+        raise_shape_mismatch_error()
 
     var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
     alias width = simdwidthof[dtype]()
