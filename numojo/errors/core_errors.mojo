@@ -8,5 +8,5 @@
 #
 # ============================================================
 
-fn raise_shape_mismatch_error(message: String = "Shape Mismatch: shapes must match for this function.") raises:
+fn raise_shape_mismatch_error(message: String) raises:
     raise Error(message)

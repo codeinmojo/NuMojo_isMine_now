@@ -16,6 +16,8 @@ from numojo.core.traits.backend import Backend
 from numojo.core.ndarray import NDArray
 from numojo.routines.creation import _0darray
 
+from ..errors import raise_shape_mismatch_error
+
 # TODO Add string method to give name
 
 
@@ -57,11 +59,12 @@ struct Vectorized(Backend):
         Returns:
             A a new NDArray that is NDArray with the function func applied.
         """
-
+ # Todo 
         if array1.shape != array2.shape and array1.shape != array3.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 64 in _math_funcs.mojo)"
             )
+
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = simdwidthof[dtype]()
 
@@ -107,8 +110,8 @@ struct Vectorized(Backend):
         """
 
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+            "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 114 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = simdwidthof[dtype]()
@@ -190,8 +193,8 @@ struct Vectorized(Backend):
         """
 
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 197 in _math_funcs.mojo)"
             )
 
         # For 0darray (numojo scalar)
@@ -310,8 +313,8 @@ struct Vectorized(Backend):
         DType.bool
     ]:
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 317 in _math_funcs.mojo)"
             )
 
         # For 0darray (numojo scalar)
@@ -519,8 +522,8 @@ struct VectorizedUnroll[unroll_factor: Int = 1](Backend):
             A a new NDArray that is NDArray with the function func applied.
         """
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 526 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = simdwidthof[dtype]()
@@ -595,8 +598,8 @@ struct VectorizedUnroll[unroll_factor: Int = 1](Backend):
         """
 
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 602 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = simdwidthof[dtype]()
@@ -695,8 +698,8 @@ struct VectorizedUnroll[unroll_factor: Int = 1](Backend):
         DType.bool
     ]:
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 702 in _math_funcs.mojo)"
             )
         var result_array: NDArray[DType.bool] = NDArray[DType.bool](
             array1.shape
@@ -821,8 +824,8 @@ struct Parallelized(Backend):
         """
 
         if array1.shape != array2.shape and array1.shape != array3.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 828 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = 1
@@ -887,8 +890,8 @@ struct Parallelized(Backend):
             A a new NDArray that is NDArray with the function func applied.
         """
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 894 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = 1
@@ -998,8 +1001,8 @@ struct Parallelized(Backend):
         """
 
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 1005 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = 1
@@ -1135,8 +1138,8 @@ struct Parallelized(Backend):
         DType.bool
     ]:
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 1142 in _math_funcs.mojo)"
             )
         var result_array: NDArray[DType.bool] = NDArray[DType.bool](
             array1.shape
@@ -1309,8 +1312,8 @@ struct VectorizedParallelized(Backend):
         """
 
         if array1.shape != array2.shape and array1.shape != array3.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 1316 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = simdwidthof[dtype]()
@@ -1386,8 +1389,8 @@ struct VectorizedParallelized(Backend):
             A a new NDArray that is NDArray with the function func applied.
         """
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 1393 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = 1
@@ -1511,8 +1514,8 @@ struct VectorizedParallelized(Backend):
         """
 
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 1518 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = simdwidthof[dtype]()
@@ -1687,8 +1690,8 @@ struct VectorizedParallelized(Backend):
         DType.bool
     ]:
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 1694 in _math_funcs.mojo)"
             )
         var result_array: NDArray[DType.bool] = NDArray[DType.bool](
             array1.shape
@@ -2399,8 +2402,8 @@ struct Naive(Backend):
         """
 
         if array1.shape != array2.shape and array1.shape != array3.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 2406 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = simdwidthof[dtype]()
@@ -2440,8 +2443,8 @@ struct Naive(Backend):
             A a new NDArray that is NDArray with the function func applied.
         """
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 2447 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = simdwidthof[dtype]()
@@ -2508,8 +2511,8 @@ struct Naive(Backend):
         """
 
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 2515 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
 
@@ -2592,8 +2595,8 @@ struct Naive(Backend):
         DType.bool
     ]:
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 2599 in _math_funcs.mojo)"
             )
         var result_array: NDArray[DType.bool] = NDArray[DType.bool](
             array1.shape
@@ -2699,8 +2702,8 @@ struct VectorizedVerbose(Backend):
         """
 
         if array1.shape != array2.shape and array1.shape != array3.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 2706 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = simdwidthof[dtype]()
@@ -2751,8 +2754,8 @@ struct VectorizedVerbose(Backend):
             A a new NDArray that is NDArray with the function func applied.
         """
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 2758 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = simdwidthof[dtype]()
@@ -2838,8 +2841,8 @@ struct VectorizedVerbose(Backend):
         """
 
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 2845 in _math_funcs.mojo)"
             )
         var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
         alias width = simdwidthof[dtype]()
@@ -2957,8 +2960,8 @@ struct VectorizedVerbose(Backend):
         DType.bool
     ]:
         if array1.shape != array2.shape:
-            raise Error(
-                "Shape Mismatch error shapes must match for this function"
+            raise_shape_mismatch_error(
+                "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 2964 in _math_funcs.mojo)"
             )
         var result_array: NDArray[DType.bool] = NDArray[DType.bool](
             array1.shape

@@ -67,9 +67,11 @@ fn math_func_2_array_in_one_array_out[
     Returns:
         A new NDArray that is the result of applying the function to the input NDArrays.
     """
-   # TODO
+
     if array1.shape != array2.shape:
-        raise_shape_mismatch_error()
+        raise_shape_mismatch_error(
+            "ShapeMismatchError: expected all input arrays to have the same shape, but got different shapes (at line 73 in _array_funcs.mojo)"
+        )
 
     var result_array: NDArray[dtype] = NDArray[dtype](array1.shape)
     alias width = simdwidthof[dtype]()
